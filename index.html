@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 引用 handlebars & jQuery -->
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script type='text/javascript'
+        src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js'></script>
+
+    <link href="/CSS/style.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
+
+    <title>timeline_0927</title>
+</head>
+
+<body>
+    <h1>電車銷售22</h1>
+
+    <!-- 1. handlebars 樣板 (html) -->
+    <!-- html 樣板 + 資料迴圈 -->
+    <script id="s1Template" type="text/x-handlebars-template">
+
+            <ol class="s1">
+                {{#each values}}
+                <li>
+                    <img src={{[3]}} alt="" height="60" style="float: left; margin: 0px">
+                    <a class="event-date" href={{[4]}}>{{[1]}}</a>
+                    <p class="event-description">{{[2]}}</p>
+                    <p class="event-description">{{[7]}}</p>
+                    <p class="event-description">{{[6]}}</p>
+                    <a class="event-date" href={{[8]}}>其他照片</a>
+                </li>
+                {{/each}}
+            </ol>
+           
+    </script>
+
+    <!-- 2. 標籤要渲染的位置 -->
+    <!-- <div id="output"></div> -->
+    <div id="s1"></div> <!-- 真實渲染的地方 -->
+
+    <!-- 3. ajax api & handlebars 載入模板 zone -->
+    <script>
+
+        $(function () {
+            $.get('https://sheets.googleapis.com/v4/spreadsheets/1CR-nLF7nKm5J3XK5x3MxgDs6hfryEfRG7jIiYG5TEFU/values/list?alt=json&key=AIzaSyDQJnRmuvThGNBt3Z3SLRliA4crPBg6BX0', function (data_html) {    //這裡 api 接口要改 自己的 
+                // console.log(data_html);
+                console.log("GDS")
+                var source = $("#s1Template").html();// 載入模板 (3. 載入模板 "input")
+                var template = Handlebars.compile(source);
+                $("#s1").append(template(data_html));
+                // $("#s1").append(template(data2)); //是 jquery $ 要渲染html的 位置,test 非json sort, // 4. 導入資料 : 存成HTML (json type)
+            });
+        });
+    </script>
+
+</body>
+
+</html>

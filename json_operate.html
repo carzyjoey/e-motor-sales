@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 引用 handlebars & jQuery -->
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script type='text/javascript'
+        src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js'></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    
+    <title>j_o2</title>
+</head>
+
+<body>
+    <h1> see the console. </console>
+    </h1>
+    <script>
+        const obj = {
+            "range": "list!A1:E12",
+            "majorDimension": "ROWS",
+            "values": [
+                [
+                    "iterm",
+                    "抬頭",
+                    "內容",
+                    "value3"
+                ],
+                [
+                    "1",
+                    "抬頭1",
+                    "內容1",
+                    "a1"
+                ]
+            ]
+        }
+        const myJSON = JSON.stringify(obj);
+        // console.log(myJSON);
+        // {"range":"list!A1:E12","majorDimension":"ROWS","values":[["iterm","抬頭","內容","value3"],["1","抬頭1","內容1","a1"]]}
+
+        // console.log(JSON.stringify(obj, ["values"]));
+        // {"values":[["iterm","抬頭","內容","value3"],["1","抬頭1","內容1","a1"]]}
+
+        B = JSON.stringify(obj, ["values"])
+        // console.log(B.slice(10, -1));
+        // [["iterm","抬頭","內容","value3"],["1","抬頭1","內容1","a1"]]
+        console.log("Target");
+        C = obj["values"];
+        console.log(C); //  **  其實這邊我已經達到 目標格式了 **
+        console.log(typeof C);  //  object
+        // 0:(4)['iterm', '抬頭', '內容', 'value3']
+        // 1:(4)['1', '抬頭1', '內容1', 'a1']
+        // -------------------------------------------
+        Object.values(C).forEach((item) => {
+            // console.log(item); // { name: 'Casper', ... }
+        });
+        // ['iterm', '抬頭', '內容', 'value3']  --- 轉成 array, 請用一般 array 操作
+        // ['1', '抬頭1', '內容1', 'a1']
+        console.log("xx")
+
+        $(function () {
+            $.get('https://sheets.googleapis.com/v4/spreadsheets/1EVEFyU56QLxzh4jzs4MPrRuXa3KAKkPFrZ80V6kKv9s/values/list?alt=json&key=AIzaSyDQJnRmuvThGNBt3Z3SLRliA4crPBg6BX0', function (data_html) {    //這裡 api 接口要改 自己的 
+                // console.log(data_html);
+
+                // vv = obj["values"];
+                vv = data_html["values"];
+                console.log("yy")
+                console.log(vv); //  **  其實這邊我已經達到 目標格式了 **
+                console.log(typeof vv);  //  object
+
+            });
+        });
+    </script>
+</body>
+
+</html>
