@@ -50,6 +50,8 @@
         $(function () {
             $.get('https://sheets.googleapis.com/v4/spreadsheets/1CR-nLF7nKm5J3XK5x3MxgDs6hfryEfRG7jIiYG5TEFU/values/list?alt=json&key=AIzaSyDQJnRmuvThGNBt3Z3SLRliA4crPBg6BX0', function (data_html) {    //這裡 api 接口要改 自己的 
                 // console.log(data_html);
+                // 電車銷售api22-09
+
                 console.log("GDS")
                 var source = $("#s1Template").html();// 載入模板 (3. 載入模板 "input")
                 var template = Handlebars.compile(source);
